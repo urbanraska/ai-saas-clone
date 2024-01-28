@@ -51,7 +51,7 @@ const CodeGenerationPage = () => {
       form.reset();
     } catch (error: any) {
       // TODO: Open Pro Model
-      console.log(error);
+      // console.log(error);
       toast.error(error);
     } finally {
       router.refresh();
