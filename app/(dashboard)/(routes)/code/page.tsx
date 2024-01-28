@@ -51,7 +51,7 @@ const CodeGenerationPage = () => {
       form.reset();
     } catch (error: any) {
       // TODO: Open Pro Model
-      // console.log(error);
+      console.log(error);
       toast.error(error);
     } finally {
       router.refresh();
@@ -142,7 +142,12 @@ const CodeGenerationPage = () => {
                   }}
                   className="text-sm overflow-hidden leading-7"
                 >
-                  {message?.content || ""}
+                  {typeof message.content === "string"
+                    ? message.content
+                    : message?.content?.reduce(
+                        (prev, current, i) => prev + current,
+                        ""
+                      )}
                 </ReactMarkdown>
               </div>
             ))}
