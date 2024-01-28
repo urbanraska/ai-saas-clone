@@ -142,8 +142,8 @@ const CodeGenerationPage = () => {
                   }}
                   className="text-sm overflow-hidden leading-7"
                 >
-                  {typeof message.content === "string"
-                    ? message.content
+                  {typeof message?.content === "string"
+                    ? message?.content
                     : message?.content?.reduce(
                         (prev, current, i) => prev + current,
                         ""

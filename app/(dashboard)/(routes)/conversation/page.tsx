@@ -129,8 +129,8 @@ const ConversationPage = () => {
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                 <p className="text-sm">
-                  {typeof message.content === "string"
-                    ? message.content
+                  {typeof message?.content === "string"
+                    ? message?.content
                     : message?.content?.reduce(
                         (prev, current, i) => prev + current,
                         ""
