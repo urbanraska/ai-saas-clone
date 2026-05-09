@@ -1,8 +1,7 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
-import toast from "react-hot-toast";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -40,7 +39,7 @@ export async function POST(req: Request) {
     });
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
-    toast.error(`CODE_ERROR: ${error}`);
+    console.error(`CODE_ERROR: ${error}`);
     return new NextResponse("Internal error", { status: 500 });
   }
 }

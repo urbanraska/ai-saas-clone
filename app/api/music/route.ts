@@ -1,6 +1,5 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import toast from "react-hot-toast";
 import Replicate from "replicate";
 
 const replicate = new Replicate({
@@ -31,7 +30,7 @@ export async function POST(req: Request) {
     );
     return NextResponse.json(response);
   } catch (error) {
-    toast.error(`MUSIC_ERROR: ${error}`);
+    console.error(`MUSIC_ERROR: ${error}`);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
