@@ -2,8 +2,9 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const groq = new OpenAI({
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1",
 });
 
 export async function POST(req: Request) {
@@ -16,8 +17,8 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!openai.apiKey) {
-      return new NextResponse("OpenAI API Key is not configured", {
+    if (!process.env.GROQ_API_KEY) {
+      return new NextResponse("GROQ API Key is not configured", {
         status: 500,
       });
     }
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
       return new NextResponse("Resolution is required", { status: 400 });
     }
 
-    const response = await openai.images.generate({
+    const response = await groq.images.generate({
       prompt,
       n: parseInt(amount,10),
       size:resolution
